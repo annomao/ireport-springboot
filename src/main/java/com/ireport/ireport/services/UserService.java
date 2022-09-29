@@ -1,5 +1,6 @@
 package com.ireport.ireport.services;
 
+import com.ireport.ireport.dto.UserCreateRequest;
 import com.ireport.ireport.entities.Post;
 import com.ireport.ireport.entities.User;
 import com.ireport.ireport.repositories.UserRepository;
@@ -16,8 +17,12 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User createUser(User user){
-       return userRepository.save(user);
+    public User createUser(UserCreateRequest user){
+       User user1 = new User();
+       user1.setName(user.getName());
+       user1.setEmail(user.getEmail());
+       user1.setUsername(user.getUsername());
+        return userRepository.save(user1);
     }
 
     public List<User> getUsers(){

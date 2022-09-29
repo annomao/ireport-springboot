@@ -1,5 +1,6 @@
 package com.ireport.ireport.services;
 
+import com.ireport.ireport.dto.PostCreateRequest;
 import com.ireport.ireport.entities.Post;
 import com.ireport.ireport.repositories.PostRepository;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,11 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public Post createPost (Post post){
-        return postRepository.save(post);
+    public Post createPost (PostCreateRequest post){
+        Post post1 = new Post();
+        post1.setTitle(post.getTitle());
+        post1.setBody(post.getBody());
+        return postRepository.save(post1);
     }
 
     public List<Post> getAllPosts(){

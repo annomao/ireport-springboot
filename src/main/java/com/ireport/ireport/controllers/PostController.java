@@ -1,9 +1,11 @@
 package com.ireport.ireport.controllers;
 
+import com.ireport.ireport.dto.PostCreateRequest;
 import com.ireport.ireport.entities.Post;
 import com.ireport.ireport.services.PostService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +28,7 @@ public class PostController {
     }
 
     @PostMapping("/posts")
-    public Post sendPost(@RequestBody Post post){
+    public Post sendPost(@Valid @RequestBody PostCreateRequest post){
         return postService.createPost(post);
     }
 

@@ -1,10 +1,12 @@
 package com.ireport.ireport.controllers;
 
+import com.ireport.ireport.dto.UserCreateRequest;
 import com.ireport.ireport.entities.Post;
 import com.ireport.ireport.entities.User;
 import com.ireport.ireport.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public User postUser(@RequestBody User user){
+    public User postUser(@Valid @RequestBody UserCreateRequest user){
         return userService.createUser(user);
     }
 

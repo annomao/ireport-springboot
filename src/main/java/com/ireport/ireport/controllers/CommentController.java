@@ -1,9 +1,11 @@
 package com.ireport.ireport.controllers;
 
+import com.ireport.ireport.dto.CommentCreateRequest;
 import com.ireport.ireport.entities.Comment;
 import com.ireport.ireport.services.CommentService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +27,7 @@ public class CommentController {
         return commentService.getComment(id);
     }
     @PostMapping("comments")
-    public Comment postComment(@RequestBody Comment comment){
+    public Comment postComment(@Valid @RequestBody CommentCreateRequest comment){
         return commentService.createComment(comment);
     }
     @PutMapping("/comments/{id}")

@@ -1,5 +1,6 @@
 package com.ireport.ireport.services;
 
+import com.ireport.ireport.dto.CommentCreateRequest;
 import com.ireport.ireport.entities.Comment;
 import com.ireport.ireport.repositories.CommentRepository;
 import org.springframework.stereotype.Service;
@@ -15,8 +16,10 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public Comment createComment(Comment comment){
-        return commentRepository.save(comment);
+    public Comment createComment(CommentCreateRequest comment){
+        Comment comment1 = new Comment();
+        comment1.setCommentBody(comment.getCommentBody());
+        return commentRepository.save(comment1);
     }
 
     public Optional<Comment> getComment(long id){
