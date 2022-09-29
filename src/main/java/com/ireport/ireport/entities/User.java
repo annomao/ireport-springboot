@@ -1,6 +1,7 @@
 package com.ireport.ireport.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="people")
@@ -11,6 +12,18 @@ public class User {
     private String name;
     private String username;
     private String email;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private List<Post> posts;
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 
     public Long getId() {
         return id;

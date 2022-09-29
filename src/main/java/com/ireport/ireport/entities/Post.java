@@ -1,6 +1,7 @@
 package com.ireport.ireport.entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="post")
@@ -10,6 +11,18 @@ public class Post {
     private Long id;
     private String title;
     private String body;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "post_id")
+    private List<Comment> comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Long getId() {
         return id;
