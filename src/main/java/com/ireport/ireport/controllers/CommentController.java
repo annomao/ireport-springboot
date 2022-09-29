@@ -26,9 +26,9 @@ public class CommentController {
     public Optional<Comment> getOneComment(@PathVariable("id") long id){
         return commentService.getComment(id);
     }
-    @PostMapping("comments")
-    public Comment postComment(@Valid @RequestBody CommentCreateRequest comment){
-        return commentService.createComment(comment);
+    @PostMapping("posts/{id}/comments")
+    public Comment postComment(@Valid @PathVariable long id,@RequestBody CommentCreateRequest comment){
+        return commentService.createComment(id,comment);
     }
     @PutMapping("/comments/{id}")
     public Optional<Comment> update(@PathVariable("id") long id, @RequestBody Comment comment){

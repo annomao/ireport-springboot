@@ -47,4 +47,8 @@ public class Post {
     public void setBody(String body) {
         this.body = body;
     }
+
+    public void addComment(Comment comment){
+        this.getComments().add(comment);
+    }
 }

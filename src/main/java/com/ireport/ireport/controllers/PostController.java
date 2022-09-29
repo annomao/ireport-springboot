@@ -27,9 +27,9 @@ public class PostController {
         return postService.getOnePost(id);
     }
 
-    @PostMapping("/posts")
-    public Post sendPost(@Valid @RequestBody PostCreateRequest post){
-        return postService.createPost(post);
+    @PostMapping("users/{id}/posts")
+    public Post sendPost(@Valid @PathVariable long id, @RequestBody PostCreateRequest post){
+        return postService.createPost(id,post);
     }
 
     @PutMapping ("/posts/{id}")

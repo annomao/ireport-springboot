@@ -2,7 +2,9 @@ package com.ireport.ireport.services;
 
 import com.ireport.ireport.dto.CommentCreateRequest;
 import com.ireport.ireport.entities.Comment;
+import com.ireport.ireport.entities.Post;
 import com.ireport.ireport.repositories.CommentRepository;
+import com.ireport.ireport.repositories.PostRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,15 +13,20 @@ import java.util.Optional;
 @Service
 public class CommentService {
     private final CommentRepository commentRepository;
+    private final PostRepository postRepository;
 
-    public CommentService(CommentRepository commentRepository) {
+    public CommentService(CommentRepository commentRepository, PostRepository postRepository) {
         this.commentRepository = commentRepository;
+        this.postRepository = postRepository;
     }
 
-    public Comment createComment(CommentCreateRequest comment){
+    public Comment createComment(long id,CommentCreateRequest comment){
+        Post post = postRepository.getReferenceById(id);
         Comment comment1 = new Comment();
         comment1.setCommentBody(comment.getCommentBody());
-        return commentRepository.save(comment1);
+        post.addComment(comment1);
+        postRepository.save(post);
+        return comment1;
     }
 
     public Optional<Comment> getComment(long id){
